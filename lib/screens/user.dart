@@ -1,8 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:provider/provider.dart';
+import 'package:shop_app/screens/orders/orders_screen.dart';
+import 'package:shop_app/screens/viewed_recently/viewed_recently.dart';
+import 'package:shop_app/screens/wishlist/wishlist_screen.dart';
+import 'package:shop_app/services/global_methods.dart';
 import 'package:shop_app/widgets/text_widget.dart';
+import 'package:provider/provider.dart';
 
 import '../provider/dark_theme_provider.dart';
 
@@ -14,6 +18,14 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
+  final TextEditingController _addressTextController =
+      TextEditingController(text: "");
+  @override
+  void dispose() {
+    _addressTextController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
@@ -75,25 +87,36 @@ class _UserScreenState extends State<UserScreen> {
                 title: 'Address 2',
                 subtitle: 'My subtitle',
                 icon: IconlyLight.profile,
-                onPressed: () {},
+                onPressed: () async {
+                  await _showAddressDialog();
+                },
                 color: color,
               ),
               _listTiles(
                 title: 'Orders',
                 icon: IconlyLight.bag,
-                onPressed: () {},
+                onPressed: () {
+                  GlobalMethods.navigateTo(
+                      ctx: context, routeName: OrdersScreen.routeName);
+                },
                 color: color,
               ),
               _listTiles(
                 title: 'Wishlist',
                 icon: IconlyLight.heart,
-                onPressed: () {},
+                onPressed: () {
+                  GlobalMethods.navigateTo(
+                      ctx: context, routeName: WishlistScreen.routeName);
+                },
                 color: color,
               ),
               _listTiles(
                 title: 'Viewed',
                 icon: IconlyLight.show,
-                onPressed: () {},
+                onPressed: () {
+                  GlobalMethods.navigateTo(
+                      ctx: context, routeName: ViewedRecentlyScreen.routeName);
+                },
                 color: color,
               ),
               _listTiles(
@@ -122,15 +145,45 @@ class _UserScreenState extends State<UserScreen> {
               _listTiles(
                 title: 'Logout',
                 icon: IconlyLight.logout,
-                onPressed: () {},
+                onPressed: () {
+                  GlobalMethods.warningDialog(
+                      title: 'Sign out',
+                      subtitle: 'Do you wanna sign out?',
+                      fct: () {},
+                      context: context);
+                },
                 color: color,
               ),
-              //listTileAsRow(),
+              // listTileAsRow(),
             ],
           ),
         ),
       ),
     ));
+  }
+
+  Future<void> _showAddressDialog() async {
+    await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Update'),
+            content: TextField(
+              // onChanged: (value) {
+              //   print('_addressTextController.text ${_addressTextController.text}');
+              // },
+              controller: _addressTextController,
+              maxLines: 5,
+              decoration: const InputDecoration(hintText: "Your address"),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {},
+                child: const Text('Update'),
+              ),
+            ],
+          );
+        });
   }
 
   Widget _listTiles({
@@ -160,25 +213,25 @@ class _UserScreenState extends State<UserScreen> {
     );
   }
 
-// Alternative code for the listTile.
-/*  Widget listTileAsRow() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: <Widget>[
-          const Icon(Icons.settings),
-          const SizedBox(width: 10),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text('Title'),
-              Text('Subtitle'),
-            ],
-          ),
-          const Spacer(),
-          const Icon(Icons.chevron_right)
-        ],
-      ),
-    );
-  }*/
+// // Alternative code for the listTile.
+//   Widget listTileAsRow() {
+//     return Padding(
+//       padding: const EdgeInsets.all(8.0),
+//       child: Row(
+//         children: <Widget>[
+//           const Icon(Icons.settings),
+//           const SizedBox(width: 10),
+//           Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: const [
+//               Text('Title'),
+//               Text('Subtitle'),
+//             ],
+//           ),
+//           const Spacer(),
+//           const Icon(Icons.chevron_right)
+//         ],
+//       ),
+//     );
+//   }
 }
