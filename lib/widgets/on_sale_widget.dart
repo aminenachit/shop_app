@@ -43,7 +43,7 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       FancyShimmerImage(
-                        imageUrl: 'https://i.ibb.co/F0s3FHQ/Apricots.png',
+                        imageUrl: 'https://electromall.ma/wp-content/uploads/2016/03/apple-pro.jpg',
                         height: size.width * 0.22,
                         width: size.width * 0.22,
                         boxFit: BoxFit.fill,
@@ -51,7 +51,7 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                       Column(
                         children: [
                           TextWidget(
-                            text: '1KG',
+                            text: '1 pc',
                             color: color,
                             textSize: 22,
                             isTitle: true,
@@ -77,8 +77,8 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                     ],
                   ),
                   const PriceWidget(
-                    salePrice: 2.99,
-                    price: 5.9,
+                    salePrice: 399,
+                    price: 559,
                     textPrice: '1',
                     isOnSale: true,
                   ),

@@ -22,17 +22,17 @@ class PriceWidget extends StatelessWidget {
         child: Row(
       children: [
         TextWidget(
-          text: '\$${(userPrice * int.parse(textPrice)).toStringAsFixed(2)}',
+          text: '\$${(userPrice * int.parse(textPrice)).toStringAsFixed(0)}',
           color: Colors.green,
           textSize: 18,
         ),
         const SizedBox(
-          width: 5,
+          width: 20,
         ),
         Visibility(
           visible: isOnSale? true :false,
           child: Text(
-            '\$${(price * int.parse(textPrice)).toStringAsFixed(2)}',
+            '\$${(price * int.parse(textPrice)).toStringAsFixed(0)}',
             style: TextStyle(
               fontSize: 15,
               color: color,
