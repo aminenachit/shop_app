@@ -74,7 +74,7 @@ class CartScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Row(children: [
           Material(
-            color: Colors.green,
+            color: Color.fromARGB(255, 86, 105, 226),
             borderRadius: BorderRadius.circular(10),
             child: InkWell(
               borderRadius: BorderRadius.circular(10),

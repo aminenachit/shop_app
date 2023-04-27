@@ -36,7 +36,7 @@ class WishlistWidget extends StatelessWidget {
                 width: size.width * 0.2,
                 height: size.width * 0.25,
                 child: FancyShimmerImage(
-                  imageUrl: 'https://i.ibb.co/F0s3FHQ/Apricots.png',
+                  imageUrl: 'https://electromall.ma/wp-content/uploads/2016/03/apple-pro.jpg',
                   boxFit: BoxFit.fill,
                 ),
               ),
@@ -69,7 +69,7 @@ class WishlistWidget extends StatelessWidget {
                     height: 5,
                   ),
                   TextWidget(
-                    text: '\$2.59',
+                    text: '\$399',
                     color: color,
                     textSize: 18.0,
                     maxLines: 1,

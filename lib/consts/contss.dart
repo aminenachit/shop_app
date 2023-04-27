@@ -6,12 +6,12 @@ class Constss {
     'assets/images/offres/offer4.jpg'
   ];
   static List<String> authImagesPaths = [
-    'assets/images/landing/buy-on-laptop.jpg',
-    'assets/images/landing/buy-through.png',
-    'assets/images/landing/buyfood.jpg',
-    'assets/images/landing/grocery-cart.jpg',
-    'assets/images/landing/grocery-cart.jpg',
-    'assets/images/landing/store.jpg',
-    'assets/images/landing/vergtablebg.jpg',
+    'assets/images/landing/l1.jpg',
+    'assets/images/landing/l2.jpg',
+    'assets/images/landing/l3.jpg',
+    'assets/images/landing/l4.jpg',
+    'assets/images/landing/l4.jpg',
+    'assets/images/landing/l5.jpg',
+    'assets/images/landing/l6.jpg',
   ];
 }

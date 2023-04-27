@@ -27,7 +27,7 @@ class _OrderWidgetState extends State<OrderWidget> {
       },
       leading: FancyShimmerImage(
         width: size.width * 0.2,
-        imageUrl: 'https://i.ibb.co/F0s3FHQ/Apricots.png',
+        imageUrl: 'https://electromall.ma/wp-content/uploads/2016/03/apple-pro.jpg',
         boxFit: BoxFit.fill,
       ),
       title: TextWidget(text: 'Title  x12', color: color, textSize: 18),

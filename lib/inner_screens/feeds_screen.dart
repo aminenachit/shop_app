@@ -57,12 +57,12 @@ class _FeedsScreenState extends State<FeedsScreen> {
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide:
-                        const BorderSide(color: Colors.greenAccent, width: 1),
+                        const BorderSide(color: Color.fromARGB(255, 105, 179, 240), width: 1),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide:
-                        const BorderSide(color: Colors.greenAccent, width: 1),
+                        const BorderSide(color: Color.fromARGB(255, 105, 179, 240), width: 1),
                   ),
                   hintText: "What's in your mind",
                   prefixIcon: const Icon(Icons.search),

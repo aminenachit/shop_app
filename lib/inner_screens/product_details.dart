@@ -50,7 +50,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         Flexible(
           flex: 2,
           child: FancyShimmerImage(
-            imageUrl: 'https://i.ibb.co/F0s3FHQ/Apricots.png',
+            imageUrl: 'https://electromall.ma/wp-content/uploads/2016/03/apple-pro.jpg',
             boxFit: BoxFit.scaleDown,
             width: size.width,
             // height: screenHeight * .4,
@@ -93,13 +93,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       TextWidget(
-                        text: '\$2.59',
+                        text: '\$399',
                         color: Colors.green,
                         textSize: 22,
                         isTitle: true,
                       ),
                       TextWidget(
-                        text: '/Kg',
+                        text: '',
                         color: color,
                         textSize: 12,
                         isTitle: false,
@@ -108,9 +108,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                         width: 10,
                       ),
                       Visibility(
-                        visible: true,
+                        visible: false,
                         child: Text(
-                          '\$3.9',
+                          '\$559',
                           style: TextStyle(
                               fontSize: 15,
                               color: color,
@@ -122,7 +122,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         padding: const EdgeInsets.symmetric(
                             vertical: 4, horizontal: 8),
                         decoration: BoxDecoration(
-                            color: const Color.fromRGBO(63, 200, 101, 1),
+                            color: Color.fromARGB(255, 62, 114, 227),
                             borderRadius: BorderRadius.circular(5)),
                         child: TextWidget(
                           text: 'Free delivery',
@@ -169,7 +169,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           border: UnderlineInputBorder(),
                         ),
                         textAlign: TextAlign.center,
-                        cursorColor: Colors.green,
+                        cursorColor: const Color.fromARGB(255, 76, 84, 175),
                         enabled: true,
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(RegExp('[0-9]')),
@@ -231,13 +231,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                               child: Row(
                                 children: [
                                   TextWidget(
-                                    text: '\$2.59/',
+                                    text: '\$399/',
                                     color: color,
                                     textSize: 20,
                                     isTitle: true,
                                   ),
                                   TextWidget(
-                                    text: '${_quantityTextController.text}Kg',
+                                    text: '${_quantityTextController.text}pc',
                                     color: color,
                                     textSize: 16,
                                     isTitle: false,
@@ -253,7 +253,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       ),
                       Flexible(
                         child: Material(
-                          color: Colors.green,
+                          color: Color.fromARGB(255, 77, 106, 235),
                           borderRadius: BorderRadius.circular(10),
                           child: InkWell(
                             onTap: () {},

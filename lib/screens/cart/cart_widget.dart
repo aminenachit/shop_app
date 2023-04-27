@@ -59,7 +59,7 @@ class _CartWidgetState extends State<CartWidget> {
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: FancyShimmerImage(
-                        imageUrl: 'https://i.ibb.co/F0s3FHQ/Apricots.png',
+                        imageUrl: 'https://electromall.ma/wp-content/uploads/2016/03/apple-pro.jpg',
                         boxFit: BoxFit.fill,
                       ),
                     ),
@@ -132,7 +132,7 @@ class _CartWidgetState extends State<CartWidget> {
                                         .toString();
                                   });
                                 },
-                                color: Colors.green,
+                                color: Color.fromARGB(255, 73, 116, 234),
                                 icon: CupertinoIcons.plus,
                               )
                             ],

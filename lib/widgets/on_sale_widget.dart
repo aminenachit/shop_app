@@ -44,14 +44,14 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                     children: [
                       FancyShimmerImage(
                         imageUrl: 'https://electromall.ma/wp-content/uploads/2016/03/apple-pro.jpg',
-                        height: size.width * 0.22,
+                        height: size.width * 0.24,
                         width: size.width * 0.22,
                         boxFit: BoxFit.fill,
                       ),
                       Column(
                         children: [
                           TextWidget(
-                            text: '1 pc',
+                            text: '',
                             color: color,
                             textSize: 22,
                             isTitle: true,

@@ -48,9 +48,10 @@ class _FeedsWidgetState extends State<FeedsWidget> {
           borderRadius: BorderRadius.circular(12),
           child: Column(children: [
             FancyShimmerImage(
-              imageUrl: 'https://i.ibb.co/F0s3FHQ/Apricots.png',
-              height: size.width * 0.21,
-              width: size.width * 0.2,
+              imageUrl:
+                  'https://electromall.ma/wp-content/uploads/2016/03/apple-pro.jpg',
+              height: size.width * 0.24,
+              width: size.width * 0.21,
               boxFit: BoxFit.fill,
             ),
             Padding(
@@ -74,12 +75,12 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(
-                    flex: 4,
+                    flex: 2,
                     child: PriceWidget(
-                      salePrice: 2.99,
-                      price: 5.9,
+                      salePrice: 399,
+                      price: 559,
                       textPrice: _quantityTextController.text,
-                      isOnSale: true,
+                      isOnSale: false,
                     ),
                   ),
                   const SizedBox(
@@ -92,7 +93,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                           flex: 3,
                           child: FittedBox(
                             child: TextWidget(
-                              text: 'KG',
+                              text: 'Quantity',
                               color: color,
                               textSize: 18,
                               isTitle: true,
@@ -136,7 +137,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                   text: 'Add to cart',
                   maxLines: 1,
                   color: color,
-                  textSize: 20,
+                  textSize: 18,
                 ),
                 style: ButtonStyle(
                     backgroundColor:
