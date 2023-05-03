@@ -4,7 +4,7 @@ import 'package:shop_app/widgets/categories_widget.dart';
 import 'package:shop_app/widgets/text_widget.dart';
 
 class CategoriesScreen extends StatelessWidget {
-   CategoriesScreen({Key? key}) : super(key: key);
+  CategoriesScreen({Key? key}) : super(key: key);
 
   List<Color> gridColors = [
     const Color.fromARGB(255, 184, 182, 182),
@@ -15,17 +15,17 @@ class CategoriesScreen extends StatelessWidget {
     const Color.fromARGB(255, 184, 182, 182),
   ];
 
-List<Map<String, dynamic>> catInfo = [
+  List<Map<String, dynamic>> catInfo = [
     {
-      'imgPath': 'assets/images/cat/phone.jpg',
-      'catText': 'phones',
+      'imgPath': 'assets/images/cat/phone.png',
+      'catText': 'Phone',
     },
     {
-      'imgPath': 'assets/images/cat/pc.jpg',
+      'imgPath': 'assets/images/cat/laptop.jpg',
       'catText': 'laptops',
     },
     {
-      'imgPath': 'assets/images/cat/airpods.jpg',
+      'imgPath': 'assets/images/cat/earphones.jpg',
       'catText': 'earphones',
     },
     {
@@ -36,14 +36,13 @@ List<Map<String, dynamic>> catInfo = [
       'imgPath': 'assets/images/cat/headphones.jpg',
       'catText': 'headphones',
     },
-     {
-      'imgPath': 'assets/images/cat/tv.jpg',
+    {
+      'imgPath': 'assets/images/cat/smarttv.jpg',
       'catText': 'smart tv',
     },
   ];
   @override
   Widget build(BuildContext context) {
-
     final utils = Utils(context);
     Color color = utils.color;
     return Scaffold(
@@ -63,7 +62,7 @@ List<Map<String, dynamic>> catInfo = [
             crossAxisCount: 2,
             childAspectRatio: 240 / 250,
             crossAxisSpacing: 12, // Vertical spacing
-            mainAxisSpacing: 10, // Horizontal spacing 
+            mainAxisSpacing: 10, // Horizontal spacing
             children: List.generate(6, (index) {
               return CategoriesWidget(
                 catText: catInfo[index]['catText'],

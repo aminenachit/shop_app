@@ -1,11 +1,15 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shop_app/models/products_model.dart';
+import 'package:shop_app/providers/cart_provider.dart';
 import 'package:shop_app/widgets/price_widget.dart';
 import 'package:shop_app/widgets/text_widget.dart';
+import 'package:provider/provider.dart';
 
 import '../inner_screens/on_sale_screen.dart';
 import '../inner_screens/product_details.dart';
+import '../providers/wishlist_provider.dart';
 import '../services/global_methods.dart';
 import '../services/utils.dart';
 import 'heart_btn.dart';
@@ -35,6 +39,12 @@ class _FeedsWidgetState extends State<FeedsWidget> {
   Widget build(BuildContext context) {
     final Color color = Utils(context).color;
     Size size = Utils(context).getScreenSize;
+    final productModel = Provider.of<ProductModel>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
+    bool? _isInCart = cartProvider.getCartItems.containsKey(productModel.id);
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
+    bool? _isInWishlist =
+        wishlistProvider.getWishlistItems.containsKey(productModel.id);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Material(
@@ -42,30 +52,41 @@ class _FeedsWidgetState extends State<FeedsWidget> {
         color: Theme.of(context).cardColor,
         child: InkWell(
           onTap: () {
-            GlobalMethods.navigateTo(
-                ctx: context, routeName: ProductDetails.routeName);
+            Navigator.pushNamed(context, ProductDetails.routeName,
+                arguments: productModel.id);
+            // GlobalMethods.navigateTo(
+            //     ctx: context, routeName: ProductDetails.routeName);
           },
           borderRadius: BorderRadius.circular(12),
           child: Column(children: [
             FancyShimmerImage(
-              imageUrl:
-                  'https://electromall.ma/wp-content/uploads/2016/03/apple-pro.jpg',
-              height: size.width * 0.24,
-              width: size.width * 0.21,
+              imageUrl: productModel.imageUrl,
+              height: size.width * 0.22,
+              width: size.width * 0.22,
               boxFit: BoxFit.fill,
             ),
+            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextWidget(
-                    text: 'Title',
-                    color: color,
-                    textSize: 20,
-                    isTitle: true,
+                  Flexible(
+                    flex: 8,
+                    child: TextWidget(
+                      text: productModel.title,
+                      color: color,
+                      maxLines: 1,
+                      textSize: 16,
+                      isTitle: true,
+                    ),
                   ),
-                  const HeartBTN(),
+                  Flexible(
+                      flex: 1,
+                      child: HeartBTN(
+                        productId: productModel.id,
+                        isInWishlist: _isInWishlist,
+                      )),
                 ],
               ),
             ),
@@ -75,27 +96,24 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(
-                    flex: 2,
+                    flex: 3,
                     child: PriceWidget(
-                      salePrice: 399,
-                      price: 559,
+                      salePrice: productModel.salePrice,
+                      price: productModel.price,
                       textPrice: _quantityTextController.text,
-                      isOnSale: false,
+                      isOnSale: productModel.isOnSale,
                     ),
-                  ),
-                  const SizedBox(
-                    width: 3,
                   ),
                   Flexible(
                     child: Row(
                       children: [
                         Flexible(
-                          flex: 3,
+                          flex: 6,
                           child: FittedBox(
                             child: TextWidget(
-                              text: 'Quantity',
+                              text: productModel.isPiece ? 'Piece' : 'piece',
                               color: color,
-                              textSize: 18,
+                              textSize: 20,
                               isTitle: true,
                             ),
                           ),
@@ -128,16 +146,25 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                 ],
               ),
             ),
-            const Spacer(),
+            //const Spacer(),
             SizedBox(
               width: double.infinity,
               child: TextButton(
-                onPressed: () {},
+                onPressed: _isInCart
+                    ? null
+                    : () {
+                        // if (_isInCart) {
+                        //   return;
+                        // }
+                        cartProvider.addProductsToCart(
+                            productId: productModel.id,
+                            quantity: int.parse(_quantityTextController.text));
+                      },
                 child: TextWidget(
-                  text: 'Add to cart',
+                  text: _isInCart ? 'In cart' : 'Add to cart',
                   maxLines: 1,
                   color: color,
-                  textSize: 18,
+                  textSize: 20,
                 ),
                 style: ButtonStyle(
                     backgroundColor:
