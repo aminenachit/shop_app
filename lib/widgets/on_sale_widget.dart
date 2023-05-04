@@ -1,4 +1,5 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:shop_app/services/utils.dart';
@@ -6,6 +7,7 @@ import 'package:shop_app/widgets/heart_btn.dart';
 import 'package:shop_app/widgets/text_widget.dart';
 import 'package:provider/provider.dart';
 
+import '../consts/firebase_consts.dart';
 import '../inner_screens/on_sale_screen.dart';
 import '../inner_screens/product_details.dart';
 import '../models/products_model.dart';
@@ -65,7 +67,7 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                       Column(
                         children: [
                           TextWidget(
-                            text: productModel.isPiece ? '1 Piece' : '1piece',
+                            text: productModel.isPiece ? '1Piece' : '1piece',
                             color: color,
                             textSize: 18,
                             isTitle: true,
@@ -79,6 +81,16 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                                 onTap: _isInCart
                                     ? null
                                     : () {
+                                        final User? user =
+                                            authInstance.currentUser;
+
+                                        if (user == null) {
+                                          GlobalMethods.errorDialog(
+                                              subtitle:
+                                                  'No user found, Please login first',
+                                              context: context);
+                                          return;
+                                        }
                                         cartProvider.addProductsToCart(
                                             productId: productModel.id,
                                             quantity: 1);
@@ -88,7 +100,9 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                                       ? IconlyBold.bag2
                                       : IconlyLight.bag2,
                                   size: 22,
-                                  color: _isInCart ? Color.fromARGB(255, 46, 32, 199) : color,
+                                  color: _isInCart
+                                      ? Color.fromARGB(255, 19, 12, 232)
+                                      : color,
                                 ),
                               ),
                               HeartBTN(

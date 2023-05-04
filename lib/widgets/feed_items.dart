@@ -1,4 +1,5 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shop_app/models/products_model.dart';
@@ -7,6 +8,7 @@ import 'package:shop_app/widgets/price_widget.dart';
 import 'package:shop_app/widgets/text_widget.dart';
 import 'package:provider/provider.dart';
 
+import '../consts/firebase_consts.dart';
 import '../inner_screens/on_sale_screen.dart';
 import '../inner_screens/product_details.dart';
 import '../providers/wishlist_provider.dart';
@@ -65,7 +67,6 @@ class _FeedsWidgetState extends State<FeedsWidget> {
               width: size.width * 0.22,
               boxFit: BoxFit.fill,
             ),
-            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
@@ -146,7 +147,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                 ],
               ),
             ),
-            //const Spacer(),
+            const Spacer(),
             SizedBox(
               width: double.infinity,
               child: TextButton(
@@ -156,6 +157,14 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                         // if (_isInCart) {
                         //   return;
                         // }
+                        final User? user = authInstance.currentUser;
+
+                        if (user == null) {
+                          GlobalMethods.errorDialog(
+                              subtitle: 'No user found, Please login first',
+                              context: context);
+                          return;
+                        }
                         cartProvider.addProductsToCart(
                             productId: productModel.id,
                             quantity: int.parse(_quantityTextController.text));
