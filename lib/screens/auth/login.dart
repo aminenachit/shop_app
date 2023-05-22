@@ -10,6 +10,7 @@ import 'package:shop_app/services/global_methods.dart';
 
 import '../../consts/contss.dart';
 import '../../consts/firebase_consts.dart';
+import '../../fetch_screen.dart';
 import '../../widgets/auth_button.dart';
 import '../../widgets/google_button.dart';
 import '../../widgets/text_widget.dart';
@@ -40,19 +41,21 @@ class _LoginScreenState extends State<LoginScreen> {
   void _submitFormOnLogin() async {
     final isValid = _formKey.currentState!.validate();
     FocusScope.of(context).unfocus();
-    setState(() {
-      _isLoading = true;
-    });
+
     if (isValid) {
       _formKey.currentState!.save();
-
+      setState(() {
+        _isLoading = true;
+      });
       try {
         await authInstance.signInWithEmailAndPassword(
             email: _emailTextController.text.toLowerCase().trim(),
             password: _passTextController.text.trim());
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => const BottomBarScreen(),
-        ),);
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const FetchScreen(),
+          ),
+        );
         print('Succefully logged in');
       } on FirebaseException catch (error) {
         GlobalMethods.errorDialog(
@@ -156,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             height: 12,
                           ),
                           //Password
-      
+
                           TextFormField(
                             textInputAction: TextInputAction.done,
                             onEditingComplete: () {
@@ -231,7 +234,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                 GoogleButton(),
+                  GoogleButton(),
                   const SizedBox(
                     height: 10,
                   ),
@@ -269,7 +272,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     fct: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => const BottomBarScreen(),
+                          builder: (context) => const FetchScreen(),
                         ),
                       );
                     },
@@ -282,8 +285,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   RichText(
                       text: TextSpan(
                           text: 'Don\'t have an account?',
-                          style:
-                              const TextStyle(color: Colors.white, fontSize: 18),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 18),
                           children: [
                         TextSpan(
                             text: '  Sign up',

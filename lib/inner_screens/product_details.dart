@@ -39,11 +39,13 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget build(BuildContext context) {
     Size size = Utils(context).getScreenSize;
     final Color color = Utils(context).color;
-    final productProvider = Provider.of<ProductsProvider>(context);
+
     final cartProvider = Provider.of<CartProvider>(context);
     final wishlistProvider = Provider.of<WishlistProvider>(context);
     final productId = ModalRoute.of(context)!.settings.arguments as String;
+    final productProvider = Provider.of<ProductsProvider>(context);
     final getCurrProduct = productProvider.findProdById(productId);
+
     double usedPrice = getCurrProduct.isOnSale
         ? getCurrProduct.salePrice
         : getCurrProduct.price;
@@ -270,8 +272,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                       isTitle: true,
                                     ),
                                     TextWidget(
-                                      text:
-                                          '${_quantityTextController.text}piece',
+                                      text: '${_quantityTextController.text}piece',
                                       color: color,
                                       textSize: 16,
                                       isTitle: false,
@@ -292,7 +293,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                             child: InkWell(
                               onTap: _isInCart
                                   ? null
-                                  : () {
+                                  : () async {
                                       // if (_isInCart) {
                                       //   return;
                                       // }
@@ -306,10 +307,16 @@ class _ProductDetailsState extends State<ProductDetails> {
                                             context: context);
                                         return;
                                       }
-                                      cartProvider.addProductsToCart(
+                                      await GlobalMethods.addToCart(
                                           productId: getCurrProduct.id,
                                           quantity: int.parse(
-                                              _quantityTextController.text));
+                                              _quantityTextController.text),
+                                          context: context);
+                                      await cartProvider.fetchCart();
+                                      // cartProvider.addProductsToCart(
+                                      //     productId: getCurrProduct.id,
+                                      //     quantity: int.parse(
+                                      //         _quantityTextController.text));
                                     },
                               borderRadius: BorderRadius.circular(10),
                               child: Padding(

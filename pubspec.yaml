@@ -44,6 +44,10 @@ dependencies:
   badges: ^3.0.3
   flutter_spinkit: ^5.2.0
   fluttertoast: ^8.2.1
+  uuid: ^3.0.7
+  url_launcher: ^6.1.11
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.0
   # firebase
   firebase_core: ^2.10.0
   firebase_auth: ^4.4.2
@@ -52,9 +56,21 @@ dependencies:
   
   
 
+flutter_native_splash:
+  color: "#f5f7f7"
+  image: assets/images/finallogo.png
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/finallogo.png"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  mockito: null
+  test: null
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -78,7 +94,6 @@ flutter:
   assets:
     - assets/images/
     - assets/images/cat/
-    - assets/images/landing/
     - assets/images/offres/
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -13,7 +13,8 @@ import 'package:shop_app/services/global_methods.dart';
 import 'package:shop_app/widgets/text_widget.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/dark_theme_provider.dart';
+import '../payment.dart';
+import '../providers/dark_theme_provider.dart';
 import 'auth/login.dart';
 
 class UserScreen extends StatefulWidget {
@@ -156,6 +157,18 @@ class _UserScreenState extends State<UserScreen> {
                   color: color,
                 ),
                 _listTiles(
+                  title: 'Payment',
+                  icon: Icons.payment,
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PayPalPaymentScreen(),
+                      ),
+                    );
+                  },
+                  color: color,
+                ),
+                _listTiles(
                   title: 'Wishlist',
                   icon: IconlyLight.heart,
                   onPressed: () {
@@ -230,6 +243,7 @@ class _UserScreenState extends State<UserScreen> {
                   },
                   color: color,
                 ),
+                
                 // listTileAsRow(),
               ],
             ),

@@ -1,7 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/inner_screens/on_sale_screen.dart';
-import 'package:shop_app/provider/dark_theme_provider.dart';
+import 'package:shop_app/providers/dark_theme_provider.dart';
+import 'package:shop_app/providers/orders_provider.dart';
 import 'package:shop_app/providers/products_provider.dart';
 import 'package:shop_app/providers/viewed_prod_provider.dart';
 import 'package:shop_app/screens/home_screen.dart';
@@ -9,6 +10,7 @@ import 'package:shop_app/screens/viewed_recently/viewed_recently.dart';
 import 'package:provider/provider.dart';
 
 import 'consts/theme_data.dart';
+import 'fetch_screen.dart';
 import 'inner_screens/cat_screen.dart';
 import 'inner_screens/feeds_screen.dart';
 import 'inner_screens/product_details.dart';
@@ -54,6 +56,7 @@ class _MyAppState extends State<MyApp> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const MaterialApp(
+              debugShowCheckedModeBanner: false,
               home: Scaffold(
                   body: Center(
                 child: CircularProgressIndicator(),
@@ -61,6 +64,7 @@ class _MyAppState extends State<MyApp> {
             );
           } else if (snapshot.hasError) {
             const MaterialApp(
+              debugShowCheckedModeBanner: false,
               home: Scaffold(
                   body: Center(
                 child: Text('An error occured'),
@@ -84,6 +88,9 @@ class _MyAppState extends State<MyApp> {
               ChangeNotifierProvider(
                 create: (_) => ViewedProdProvider(),
               ),
+              ChangeNotifierProvider(
+                create: (_) => OrdersProvider(),
+              ),
             ],
             child: Consumer<DarkThemeProvider>(
                 builder: (context, themeProvider, child) {
@@ -91,7 +98,7 @@ class _MyAppState extends State<MyApp> {
                   debugShowCheckedModeBanner: false,
                   title: 'Flutter Demo',
                   theme: Styles.themeData(themeProvider.getDarkTheme, context),
-                  home: const BottomBarScreen(),
+                  home: const FetchScreen(),
                   routes: {
                     OnSaleScreen.routeName: (ctx) => const OnSaleScreen(),
                     FeedsScreen.routeName: (ctx) => const FeedsScreen(),

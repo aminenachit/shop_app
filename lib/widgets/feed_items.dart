@@ -63,8 +63,8 @@ class _FeedsWidgetState extends State<FeedsWidget> {
           child: Column(children: [
             FancyShimmerImage(
               imageUrl: productModel.imageUrl,
-              height: size.width * 0.22,
-              width: size.width * 0.22,
+              height: size.width * 0.21,
+              width: size.width * 0.2,
               boxFit: BoxFit.fill,
             ),
             Padding(
@@ -73,12 +73,12 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(
-                    flex: 8,
+                    flex: 3,
                     child: TextWidget(
                       text: productModel.title,
                       color: color,
                       maxLines: 1,
-                      textSize: 16,
+                      textSize: 18,
                       isTitle: true,
                     ),
                   ),
@@ -112,7 +112,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                           flex: 6,
                           child: FittedBox(
                             child: TextWidget(
-                              text: productModel.isPiece ? 'Piece' : 'piece',
+                              text: productModel.isPiece ? 'Piece' : 'kg',
                               color: color,
                               textSize: 20,
                               isTitle: true,
@@ -153,7 +153,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
               child: TextButton(
                 onPressed: _isInCart
                     ? null
-                    : () {
+                    : () async {
                         // if (_isInCart) {
                         //   return;
                         // }
@@ -165,9 +165,14 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                               context: context);
                           return;
                         }
-                        cartProvider.addProductsToCart(
+                        await GlobalMethods.addToCart(
                             productId: productModel.id,
-                            quantity: int.parse(_quantityTextController.text));
+                            quantity: int.parse(_quantityTextController.text),
+                            context: context);
+                        await cartProvider.fetchCart();
+                        // cartProvider.addProductsToCart(
+                        //     productId: productModel.id,
+                        //     quantity: int.parse(_quantityTextController.text));
                       },
                 child: TextWidget(
                   text: _isInCart ? 'In cart' : 'Add to cart',

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:shop_app/inner_screens/feeds_screen.dart';
 import 'package:shop_app/inner_screens/on_sale_screen.dart';
-import 'package:shop_app/provider/dark_theme_provider.dart';
+import 'package:shop_app/providers/dark_theme_provider.dart';
 import 'package:shop_app/services/utils.dart';
 import 'package:shop_app/widgets/text_widget.dart';
 import 'package:provider/provider.dart';
@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisCount: 2,
               padding: EdgeInsets.zero,
               // crossAxisSpacing: 10,
-              childAspectRatio: size.width / (size.height * 0.59),
+              childAspectRatio: size.width / (size.height * 0.61),
               children: List.generate(
                   allProducts.length < 4
                       ? allProducts.length // length 3

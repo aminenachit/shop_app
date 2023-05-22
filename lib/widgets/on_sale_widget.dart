@@ -51,8 +51,7 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                 // mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
@@ -60,16 +59,16 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                     children: [
                       FancyShimmerImage(
                         imageUrl: productModel.imageUrl,
-                        height: size.width * 0.24,
+                        height: size.width * 0.22,
                         width: size.width * 0.22,
                         boxFit: BoxFit.fill,
                       ),
                       Column(
                         children: [
                           TextWidget(
-                            text: productModel.isPiece ? '1Piece' : '1piece',
+                            text: productModel.isPiece ? '1Piece' : '1pece',
                             color: color,
-                            textSize: 18,
+                            textSize: 22,
                             isTitle: true,
                           ),
                           const SizedBox(
@@ -80,7 +79,7 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                               GestureDetector(
                                 onTap: _isInCart
                                     ? null
-                                    : () {
+                                    : () async {
                                         final User? user =
                                             authInstance.currentUser;
 
@@ -91,18 +90,21 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                                               context: context);
                                           return;
                                         }
-                                        cartProvider.addProductsToCart(
+                                        await GlobalMethods.addToCart(
                                             productId: productModel.id,
-                                            quantity: 1);
+                                            quantity: 1,
+                                            context: context);
+                                        await cartProvider.fetchCart();
+                                        // cartProvider.addProductsToCart(
+                                        //     productId: productModel.id,
+                                        //     quantity: 1);
                                       },
                                 child: Icon(
                                   _isInCart
                                       ? IconlyBold.bag2
                                       : IconlyLight.bag2,
                                   size: 22,
-                                  color: _isInCart
-                                      ? Color.fromARGB(255, 19, 12, 232)
-                                      : color,
+                                  color: _isInCart ? Colors.green : color,
                                 ),
                               ),
                               HeartBTN(
@@ -115,21 +117,20 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                       )
                     ],
                   ),
-                  const SizedBox(height: 10),
                   PriceWidget(
                     salePrice: productModel.salePrice,
                     price: productModel.price,
                     textPrice: '1',
                     isOnSale: true,
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 5),
                   TextWidget(
                     text: productModel.title,
                     color: color,
                     textSize: 16,
                     isTitle: true,
                   ),
-                  const SizedBox(height: 3),
+                  const SizedBox(height: 5),
                 ]),
           ),
         ),
